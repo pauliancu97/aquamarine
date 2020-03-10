@@ -1,7 +1,7 @@
 import java.lang.IllegalArgumentException
 import kotlin.math.sqrt
 
-open class Account(s: Int = 0){
+/*open class Account(s: Int = 0){
 
     var sum: Int = s
         private set
@@ -131,7 +131,11 @@ fun isPrime(n: Int): Boolean{
             return false
     }
     return true
-}
+}*/
+
+import kotlin.math.sqrt
+
+fun Int.isPrime() = this > 1 && (2..this / 2).none { this % it == 0 }
 
 val data = listOf(4, 6, 34, 9, 2, 4, 7)
 println("A result: $data")
@@ -141,9 +145,9 @@ println("D result: ${data.subList(0, 3)}")
 println("E result: ${data.all { it >= 0 }}")
 println("F result: ${data.map { sqrt(it.toDouble()) }}")
 println("G result: ${data.filter { it % 2 ==0 }}")
-println("H result: ${data.withIndex().filter{ it.value % 2 == 1 }.map { it.index }}")
-println("I result: ${data.filter { isPrime(it) }}")
-println("J result: ${data.last { isPrime(it) }}")
+println("H result: ${data.mapIndexedNotNull { index, value -> if (value % 2 == 1) index else null }}")
+println("I result: ${data.filter { it.isPrime() }}")
+println("J result: ${data.last { it.isPrime() }}")
 
 data class Student(val name: String, val address: String, val grade: Int)
 val students = listOf(
